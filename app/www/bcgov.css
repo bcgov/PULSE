@@ -1,0 +1,131 @@
+
+
+/* =========================================================
+   BC Sans — Official Government of BC Typeface (TTF)
+   ========================================================= */
+
+@font-face {
+  font-family: "BC Sans";
+  src: url("fonts/BCSans-Regular_2f.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BC Sans";
+  src: url("fonts/BCSans-Bold_2f.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================================================
+   BC Gov colour tokens (scoped)
+   ========================================================= */
+
+:root {
+  --bcgov-blue: #003366;
+  --bcgov-gold: #FCBA19;
+  --bcgov-white: #FFFFFF;
+  --bcgov-grey-light: #E0E0E0;
+}
+
+
+/* =========================================================
+   Navbar — BC Gov styling
+   ========================================================= */
+
+
+.navbar-default {
+  background-color: var(--bcgov-blue);
+  border: none;
+  border-bottom: 4px solid var(--bcgov-gold);
+}
+
+/* App title container */
+.navbar-default .bcgov-navbar-title {
+  display: flex;
+  align-items: right;
+  gap: 16px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+/* Logo */
+.navbar-default .bcgov-logo {
+  height: 38px;
+}
+
+/* Title text */
+.navbar-default .bcgov-title {
+  font-family: "BC Sans", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--bcgov-white);
+  line-height: 1.15;
+}
+
+.navbar-default .bcgov-subtitle {
+  font-family: "BC Sans", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--bcgov-white);
+  line-height: 1.2;
+}
+
+/* Navbar links */
+.navbar-default .navbar-nav > li > a {
+  font-family: "BC Sans", Arial, sans-serif;
+  color: var(--bcgov-white);
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > .active > a {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--bcgov-white);
+}
+
+
+/* =========================================================
+   Center navbar tabs — FIXED & SCOPED
+   ========================================================= */
+
+#bcgov-navbar .navbar-nav {
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: right;
+}
+
+
+/* =========================================================
+   BC Gov footer (compliant)
+   ========================================================= */
+
+.bcgov-footer {
+  background-color: var(--bcgov-blue);
+  border-top: 4px solid var(--bcgov-gold);
+  color: var(--bcgov-white);
+  padding: 5px 5px;
+  margin-top: 5px;
+  font-family: "BC Sans", Arial, sans-serif;
+}
+
+.bcgov-footer a {
+  color: var(--bcgov-white);
+  text-decoration: underline;
+}
+
+.bcgov-footer a:hover {
+  text-decoration: none;
+}
+
+.bcgov-footer-meta {
+  font-size: 5px;
+  color: var(--bcgov-grey-light);
+  margin-top: 5px;
+}
+
+.bslib-value-box .value-box-value {
+  font-size: 12px; /* Adjust as needed */
+}
