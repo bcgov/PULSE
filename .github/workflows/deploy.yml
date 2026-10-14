@@ -105,7 +105,6 @@ jobs:
           SHINYAPPS_NAME: ${{ secrets.SHINY_APPS_NAME }}
           SHINYAPPS_TOKEN: ${{ secrets.SHINY_APPS_TOKEN }}
           SHINYAPPS_SECRET: ${{ secrets.SHINY_APPS_SECRET }}
-          GITHUB_PAT: ${{ secrets.GH_TOKEN }}
         run: |
           Rscript -e '
 
