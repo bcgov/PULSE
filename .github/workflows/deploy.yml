@@ -102,9 +102,9 @@ jobs:
 
       - name: Deploy to shinyapps.io
         env:
-          SHINYAPPS_NAME: ${{ secrets.SHINYAPPS_NAME }}
-          SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
-          SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
+          SHINYAPPS_NAME: ${{ secrets.SHINY_APPS_NAME }}
+          SHINYAPPS_TOKEN: ${{ secrets.SHINY_APPS_TOKEN }}
+          SHINYAPPS_SECRET: ${{ secrets.SHINY_APPS_SECRET }}
           GITHUB_PAT: ${{ secrets.GH_TOKEN }}
         run: |
           Rscript -e '
