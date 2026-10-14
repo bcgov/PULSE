@@ -49,6 +49,12 @@ locations_regions <- ts_approval %>% select(c("LocationName",
                                               "Region")) %>%
   unique()
 
+locations_regions <- left_join(locations_regions, site_name_lookup, 
+                              by = join_by("LocationIdentifier" == "LocationIdentifier")) %>%
+  select(c("LocationName.y", "LocationIdentifier", "Region", "DataSource")) %>%
+  rename("LocationName" = "LocationName.y") %>%
+  filter(DataSource == "Telemetry")
+
 # date_from = as_datetime(Sys.Date() - 30)
 # date_to = as_datetime(Sys.Date())
 

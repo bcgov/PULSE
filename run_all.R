@@ -791,7 +791,8 @@ all_combinations <- expand_grid(
 )
 
 # get most recent reading at time of data run for current conditions. Some locations
-#that have telemetry are delayed like a day so are getting filtered out here
+#that have telemetry are delayed like a day so are getting filtered out here. So changed to
+# 3 day max wait before saying current reading is missing.
 
 current_reading = ts_telemetry |>
   #filter(DateTime == date_to) |>
