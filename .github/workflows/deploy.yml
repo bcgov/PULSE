@@ -111,13 +111,13 @@ jobs:
             library(rsconnect);
 
             rsconnect::setAccountInfo(
-              name = Sys.getenv("SHINYAPPS_NAME"),
-              token = Sys.getenv("SHINYAPPS_TOKEN"),
-              secret = Sys.getenv("SHINYAPPS_SECRET")
+              name = Sys.getenv("SHINY_APPS_NAME"),
+              token = Sys.getenv("SHINY_APPS_TOKEN"),
+              secret = Sys.getenv("SHINY_APPS_SECRET")
             );
 
             rsconnect::deployApp(appDir = "app",
-            appName = "weekly-hydrometric-app",
+            appName = "PULSE_app",
             forceUpdate = TRUE,
             logLevel = "verbose")
           '
