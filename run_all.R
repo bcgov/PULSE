@@ -22,7 +22,7 @@ if (!dir.exists('app/data')) {
   dir.create('app/data')
 }
 
-readRenviron(paste0(getwd(), "/.Renviron"))
+#readRenviron(paste0(getwd(), "/.Renviron"))
 username = Sys.getenv("APP_USERNAME")
 password = Sys.getenv("APP_PASSWORD")
 
