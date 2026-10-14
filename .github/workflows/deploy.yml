@@ -16,6 +16,7 @@ permissions:
 jobs:
   run-and-deploy:
     runs-on: ubuntu-latest
+    environment: prod
 
     steps:
       - name: Checkout repo
