@@ -43,6 +43,10 @@ ts_sites <- sites
 paramters = 'SGWL'
 fv_start_date = "2026-01-01"
 
+#write file to app/data
+write.csv(read.csv("pgown_regions.csv", stringsAsFactors = F), "./app/data/pgown_regions.csv")
+
+
 # Setting color codes -----------------------------------------------------
 
 # Timeseries approval status
