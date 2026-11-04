@@ -939,9 +939,13 @@ most_recent <- all_fv_info |>
       Most_Recent <= 152 ~ "#4fb06d"
     ),
     legend = case_when(
-      color == "#bf2c34" ~ "> 183",
-      color == "#f07857" ~ "153 - 183",
-      color == "#4fb06d" ~ "< 152"
+      #color == "#bf2c34" ~ "> 183",
+      #color == "#f07857" ~ "153 - 183",
+      #color == "#4fb06d" ~ "< 152"
+      
+      color == "#bf2c34" ~ "> 6 months",
+      color == "#f07857" ~ "5 - 6 months",
+      color == "#4fb06d" ~ "< 5 months"
     )
   ) #|>
   # left_join(

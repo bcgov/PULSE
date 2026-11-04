@@ -241,9 +241,16 @@ server <- function(input, output, session) {
         #filter(Parameter == "Bvolt") |>
         select(c(
           LocationName,
+          LocationIdentifier,
           Most_Recent
         )) |> unique() |>
         arrange(desc(Most_Recent))
+      
+      #join regions into
+      threshold_values <- merge(threshold_values, regions, 
+                                    by.x = "LocationIdentifier", 
+                                    by.y = "Obs.Well..") %>%
+        select(-c("X"))
       
       if (nrow(threshold_values) == 0) {
         return(gt(tibble(
@@ -272,7 +279,7 @@ server <- function(input, output, session) {
         ) |>
         tab_header(
           title = md(
-            "**Wells Not Visited in Over 183 Days**"
+            "**Wells Not Visited in Over 6 Months**"
           )
         ) |>
         tab_source_note(
@@ -392,7 +399,7 @@ server <- function(input, output, session) {
         plot.subtitle = element_text(hjust = 0, face = "plain", size = 11)
       ) +
       xlab("Date") +
-      ylab("Hourly Mean (m below ground surface)") +
+      ylab("SGWL (mbgs)") +
       scale_linetype_manual(
         values = c("Groundwater Level" = "solid", "30-day Average" = "dashed")
       ) +
@@ -468,7 +475,7 @@ server <- function(input, output, session) {
         plot.subtitle = element_text(hjust = 0, face = "plain", size = 11)
       ) +
       xlab("Date") +
-      ylab("Hourly Mean (V)") +
+      ylab("Voltage (V)") +
       scale_linetype_manual(
         values = c("Battery Voltage" = "solid", "30-day Average" = "dashed")
       ) +
@@ -611,7 +618,8 @@ server <- function(input, output, session) {
              Elevation, legend_battery, batter_colour, DataSource) %>%
       mutate(
         legend = as.factor(legend),
-        legend = fct_relevel(legend, "< 152", "153 - 183", "> 183"),
+        #legend = fct_relevel(legend, "< 152", "153 - 183", "> 183"),
+        legend = fct_relevel(legend, "< 5 months", "5 - 6 months", "> 6 months"),
         
         legend_battery = as.factor(legend_battery),
         legend_battery = fct_relevel(legend_battery, ">12.4V", "12.0 - 12.4V", "<12.0V")
@@ -625,7 +633,8 @@ server <- function(input, output, session) {
     # Explicit level order so colours always match the legend labels
     # (a factor palette built from `domain` sorts levels alphabetically,
     #  which would scramble green/orange/red here)
-    days_levels <- c("< 152", "153 - 183", "> 183")
+    #days_levels <- c("< 152", "153 - 183", "> 183")
+    days_levels <- c("< 5 months", "5 - 6 months", "> 6 months")
     batt_levels <- c(">12.4V", "12.0 - 12.4V", "<12.0V")
     cols        <- c("#4fb06d", "#f07857", "#bf2c34")
     
@@ -698,7 +707,7 @@ server <- function(input, output, session) {
     # ---- Map ----------------------------------------------------------------
     leaflet() |>
       addTiles() |>
-      setView(lat = 51.8, lng = -121.8, zoom = 6) |>
+      setView(lat = 51.8, lng = -121.8, zoom = 4) |>
       
       # Layer 1: days since last field visit (all sites)
       addMarkers(
