@@ -53,7 +53,7 @@ vbs <- list(
 )
 
 ts_graph <- navset_card_tab(
-  height = "1000px",
+  height = "400px",
   full_screen = TRUE,
   title = "Telemetry Timeseries",
   nav_panel(title = "Groundwater Level", plotlyOutput("sgwl_plot")),
