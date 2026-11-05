@@ -34,26 +34,26 @@ vbs <- list(
     value = p(textOutput("fv"), style = "font-size: 70%"),
     showcase = bs_icon("clipboard2-data-fill"),
     theme = "primary",
-    max_height = "100px"
+    max_height = "200px"
   ),
   value_box(
     title = "Current Groundwater Level",
     value = p(textOutput("sgwl"), style = "font-size: 70%"),
     showcase = bs_icon("moisture"),
     theme = "primary",
-    max_height = "100px"
+    max_height = "200px"
   ),
   value_box(
     title = "Battery Voltage",
     value = p(textOutput("battery"), style = "font-size: 70%"),
     showcase = bs_icon("battery-half"),
     theme = "primary",
-    max_height = "100px"
+    max_height = "200px"
   )
 )
 
 ts_graph <- navset_card_tab(
-  height = "800px",
+  height = "1000px",
   full_screen = TRUE,
   title = "Telemetry Timeseries",
   nav_panel(title = "Groundwater Level", plotlyOutput("sgwl_plot")),
@@ -94,28 +94,32 @@ ui <- page_navbar(
 
   nav_panel(
     "Overview Map",
-    layout_column_wrap(
-      width = 1,
-      heights_equal = "row",
-      
+    
+    div(
+      class = "d-flex flex-column gap-3",
+
       card(
         full_screen = TRUE,
-        card_body(leafletOutput("map", height = "60vh"))
+        style = "width: 100%; margin: 0 auto; aspect-ratio: 1 / 0.75;",
+        card_body(padding = 0, leafletOutput("map", height = "100%"))
          ),
-      
+    
       #tables nested side by side
       
       layout_column_wrap(
-        width = 1/2,
+        col_widths = c(2,2),
+        #row_heights = c(1,1),
         
         card(
           full_screen = TRUE,
-          gt_output("wells_low_bvolt")
+          height = 500,
+          card_body(gt_output("wells_low_bvolt"))
           ),
         card(
           full_screen = TRUE,
-          gt_output("well_visited_in_183_days")
-          ),
+          height = 500,
+          card_body(gt_output("well_visited_in_183_days"))
+          )
       )
     )
   ),

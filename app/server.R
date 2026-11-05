@@ -375,11 +375,11 @@ server <- function(input, output, session) {
     ) +
       labs(subtitle = paste0("Data from: ", min_date, " to ", max_date)) +
       geom_line(aes(linetype = line_type), na.rm = FALSE) +
-      geom_hline(
-        data = hline_df,
-        aes(yintercept = yintercept, linetype = line_type),
-        color = "black"
-      ) +
+      #geom_hline(
+      #  data = hline_df,
+      #  aes(yintercept = yintercept, linetype = line_type),
+      #  color = "black"
+      #) +
       scale_x_datetime(limits = c(min_date, max_date)) +
       # Reversed: depth below ground surface, so shallower water plots higher
       scale_y_reverse(expand = expansion(mult = 0.05)) +
@@ -398,12 +398,13 @@ server <- function(input, output, session) {
         plot.title = element_text(hjust = 0),
         plot.subtitle = element_text(hjust = 0, face = "plain", size = 11)
       ) +
-      xlab("Date") +
+      xlab("") +
       ylab("SGWL (mbgs)") +
       scale_linetype_manual(
         values = c("Groundwater Level" = "solid", "30-day Average" = "dashed")
       ) +
-      labs(linetype = "")
+      labs(linetype = "") +
+      theme(legend.position = "none")
 
     ggplotly(g, tooltip = "text")
   })
@@ -452,11 +453,11 @@ server <- function(input, output, session) {
     ) +
       labs(subtitle = paste0("Data from: ", min_date, " to ", max_date)) +
       geom_line(aes(linetype = line_type), na.rm = FALSE) +
-      geom_hline(
-        data = hline_df,
-        aes(yintercept = yintercept, linetype = line_type),
-        color = "black"
-      ) +
+      #geom_hline(
+      #  data = hline_df,
+      #  aes(yintercept = yintercept, linetype = line_type),
+      #  color = "black"
+      #) +
       scale_x_datetime(limits = c(min_date, max_date)) +
       scale_y_continuous(expand = expansion(mult = 0.05)) +
       scale_color_manual(
@@ -474,12 +475,13 @@ server <- function(input, output, session) {
         plot.title = element_text(hjust = 0),
         plot.subtitle = element_text(hjust = 0, face = "plain", size = 11)
       ) +
-      xlab("Date") +
+      xlab("") +
       ylab("Voltage (V)") +
       scale_linetype_manual(
         values = c("Battery Voltage" = "solid", "30-day Average" = "dashed")
       ) +
-      labs(linetype = "")
+      labs(linetype = "") +
+      theme(legend.position = "none")
 
     ggplotly(b, tooltip = "text")
   })
@@ -707,7 +709,7 @@ server <- function(input, output, session) {
     # ---- Map ----------------------------------------------------------------
     leaflet() |>
       addTiles() |>
-      setView(lat = 51.8, lng = -121.8, zoom = 4) |>
+      setView(lat = 51.8, lng = -121.8, zoom = 6) |>
       
       # Layer 1: days since last field visit (all sites)
       addMarkers(
