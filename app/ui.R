@@ -34,26 +34,30 @@ vbs <- list(
     value = p(textOutput("fv"), style = "font-size: 70%"),
     showcase = bs_icon("clipboard2-data-fill"),
     theme = "primary",
-    max_height = "200px"
+    max_height = "200px",
+    min_height = "150px"
   ),
   value_box(
     title = "Current Groundwater Level",
     value = p(textOutput("sgwl"), style = "font-size: 70%"),
     showcase = bs_icon("moisture"),
     theme = "primary",
-    max_height = "200px"
+    max_height = "200px",
+    min_height = "150px"
   ),
   value_box(
     title = "Battery Voltage",
     value = p(textOutput("battery"), style = "font-size: 70%"),
     showcase = bs_icon("battery-half"),
     theme = "primary",
-    max_height = "200px"
+    max_height = "200px",
+    min_height = "150px"
   )
 )
 
 ts_graph <- navset_card_tab(
-  height = "400px",
+#  max_height = "1000px",
+#  min_height = "400px",
   full_screen = TRUE,
   title = "Telemetry Timeseries",
   nav_panel(title = "Groundwater Level", plotlyOutput("sgwl_plot")),
@@ -89,38 +93,42 @@ ui <- page_navbar(
       )
     )
   ),
+  
+  fillable = FALSE, #allow pages to scroll
 
   nav_spacer(),
 
   nav_panel(
     "Overview Map",
-    
-    div(
-      class = "d-flex flex-column gap-3",
-
+      
+    layout_columns(
+      col_widths = c(7, 5),
+      
+      #leaflet map
       card(
         full_screen = TRUE,
-        style = "width: 100%; margin: 0 auto; aspect-ratio: 1 / 0.75;",
-        card_body(padding = 0, leafletOutput("map", height = "100%"))
+        height = "900px", #fixed height
+        leafletOutput("map", height = "100%")
          ),
     
-      #tables nested side by side
-      
+      #tables
       layout_column_wrap(
-        col_widths = c(2,2),
-        #row_heights = c(1,1),
+        width = 1,
+        heighs_equal = "row",
+        fill = FALSE,
         
-        card(
-          full_screen = TRUE,
-          height = 500,
-          card_body(gt_output("wells_low_bvolt"))
-          ),
-        card(
-          full_screen = TRUE,
-          height = 500,
-          card_body(gt_output("well_visited_in_183_days"))
-          )
-      )
+          card(
+            full_screen = TRUE,
+            height = "300px",
+            card_body(gt_output("well_visited_in_183_days"))
+            ),
+      
+          card(
+            full_screen = TRUE,
+            height = "500px",
+            card_body(gt_output("wells_low_bvolt"))
+            )
+        )
     )
   ),
 
@@ -148,6 +156,8 @@ ui <- page_navbar(
       ),  
       layout_column_wrap(
         width = 1,
+        min_height = 600,
+        max_height = 1000,
         ts_graph
       ),
       layout_column_wrap(
@@ -170,7 +180,10 @@ ui <- page_navbar(
           selected = "South Coast"
         )
       ),
-      card(plotlyOutput("timeseries_approval_status"))
+      card(
+        height = "1100px",
+        plotlyOutput("timeseries_approval_status")
+        )
     )
   ),
 

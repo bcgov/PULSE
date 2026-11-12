@@ -709,7 +709,7 @@ server <- function(input, output, session) {
     # ---- Map ----------------------------------------------------------------
     leaflet() |>
       addTiles() |>
-      setView(lat = 51.8, lng = -121.8, zoom = 6) |>
+      setView(lat = 53.8, lng = -122.8, zoom = 6) |>
       
       # Layer 1: days since last field visit (all sites)
       addMarkers(
